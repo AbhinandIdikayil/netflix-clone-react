@@ -6,6 +6,7 @@ import requests from '../Request'
 function Home() {
   return (
     <>
+   
       <Main />
       <Row rowId='1' title='Up coming' fetchURL={requests.requestUpcoming} />
       <Row rowId='2' title='Popular' fetchURL={requests.requestPopular} />

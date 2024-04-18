@@ -2,10 +2,11 @@ import { useState } from 'react'
 import Layout from './Layout'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
-import AuthContextProvider  from './context/AuthContext'
+import AuthContextProvider from './context/AuthContext'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Account from './pages/Account'
+import ProtectedRoute from './components/ProtectedRoute'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -16,8 +17,12 @@ function App() {
           <Route path='/' element={<Layout />} >
             <Route path='' element={<Home />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/singup' element={<Signup />} />
-            <Route path='/account' element={<Account />} />
+            <Route path='/signup' element={<Signup />} />
+            <Route path='/account' element={
+              <ProtectedRoute >
+                <Account />
+              </ProtectedRoute>
+            } />
           </Route>
         </Routes>
       </AuthContextProvider>
