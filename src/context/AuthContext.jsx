@@ -1,12 +1,12 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { auth,db } from '../firebase'
+import { auth, db } from '../firebase'
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword, signOut,
     onAuthStateChanged
 }
     from 'firebase/auth'
-import {setDoc,doc} from 'firebase/firestore'
+import { setDoc, doc } from 'firebase/firestore'
 
 
 const AuthContext = createContext();
@@ -16,8 +16,8 @@ export default function AuthContextProvider({ children }) {
 
     function signUp(email, password) {
         createUserWithEmailAndPassword(auth, email, password)
-        setDoc(doc(db,'users',email) , {
-            savedSHows:[]
+        setDoc(doc(db, 'users', email), {
+            savedSHows: []
         })
     }
 

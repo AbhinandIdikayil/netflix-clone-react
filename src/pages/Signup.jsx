@@ -2,23 +2,51 @@ import React, { useState } from 'react'
 import { Link,useNavigate } from 'react-router-dom'
 
 import { userAuth } from '../context/AuthContext'
-
+import userSchema from '../validation/form'
 
 function Signup() {
+
+
+  const [formData,setFormData] = useState({
+    email : '',
+    password:''
+  })
+
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const { user, signUp } = userAuth();
+  const [error,setError] = useState('')
+  const [fireBSError,setFireBSError] = useState('')
 
   const usenavigate = useNavigate()
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    console.log(formData)
+    e.preventDefault();
     try {
-      await signUp(email, password);
+      console.log('hai from signup')
+      console.log(formData,"--------")  
+      await userSchema.validate(formData,{abortEarly:false});
+      
+      await signUp(formData.email, formData.password);
       usenavigate('/')
     } catch (error) {
-      console.log(error)
+      const newErr ={}
+      error.inner.forEach((err) => {
+        newErr[err.path] = err.message
+      })
+      setError(newErr);
+      console.log(newErr)      
     }
+  }
+
+  const handleChange = (e) =>{ 
+    const {value,name} = e.target
+    setFormData({
+      ...formData,
+      [name]:value,
+    })
   }
 
   return (
@@ -29,15 +57,20 @@ function Signup() {
         <div className='max-w-[450px] h-[500px] bg-black/75 text-white mx-auto'>
           <div className='max-w-[320px] mx-auto py-16 '>
             <h1 className='text-3xl font-bold'>Sign up</h1>
+            {/* {error ? <p className='p-3 bg-red-400 my-2'> {error.email} </p> : null } */}
             <form onSubmit={handleSubmit} className='w-full flex flex-col py-4'>
-              <input className='p-3 my-2 bg-gray-600 rounded' type="email"
-                placeholder='Email' autoComplete='email'
-                onChange={(e) => setEmail(e.target.value)}
+              {error?.email ? <label htmlFor="" className='text-sm text-red-700 font-bold'> {error?.email} </label> : null }
+              <input className='p-3 my-2 bg-gray-600 rounded' type="text"
+                placeholder='Email' 
+                name='email'
+                onChange={handleChange}
+                // onChange={(e) => setEmail(e.target.value)}
               />
+              {error?.password ? <label className='text-sm text-red-700 font-bold'>{error?.password} </label> : null }
               <input className='p-3 my-2 bg-gray-600 rounded' type="password"
                 placeholder='Password' name='password'
-                autoComplete='current-password'
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
+                // onChange={(e) => setPassword(e.target.value)}
               />
               <button className='bg-red-700 py-3 my-6 rounded font-bold'>
                 sign up
