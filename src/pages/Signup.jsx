@@ -13,8 +13,6 @@ function Signup() {
   })
 
 
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
   const { user, signUp } = userAuth();
   const [error,setError] = useState('')
   const [fireBSError,setFireBSError] = useState('')
