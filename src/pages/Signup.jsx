@@ -22,12 +22,11 @@ function Signup() {
   const handleSubmit = async (e) => {
     console.log(formData)
     e.preventDefault();
-    try {
-      console.log('hai from signup')
-      console.log(formData,"--------")  
+    try { 
       await userSchema.validate(formData,{abortEarly:false});
       
       await signUp(formData.email, formData.password);
+      
       usenavigate('/')
     } catch (error) {
       const newErr ={}

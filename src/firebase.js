@@ -8,7 +8,7 @@ import { getFirestore } from "firebase/firestore";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-console.log( process.env.NETFLIX_CLONE_FIREBASE_API_KEY)
+console.log(process.env.NETFLIX_CLONE_FIREBASE_API_KEY)
 const firebaseConfig = {
   apiKey:process.env.NETFLIX_CLONE_FIREBASE_API_KEY,
   authDomain:process.env.NETFLIX_CLONE_FIREBASE_AUTH_DOMAIN,
