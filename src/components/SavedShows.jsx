@@ -49,7 +49,7 @@ function SavedShows() {
                 />
                 <div id={'slider'} className='h-full w-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide duration-1000 ease-in-out' >
                     {
-                        movies.map((item, id) => (
+                        movies ? (movies.map((item, id) => (
                             <div key={id} className='w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2 '>
                                 <img className='w-full h-auto block' src={`https://image.tmdb.org/t/p/w500/${item?.img}`} alt={item?.title} />
                                 <div className='absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
@@ -63,7 +63,9 @@ function SavedShows() {
                                     <AiOutlineClose />
                                 </p>
                             </div>
-                        ))
+                        )) ) : (
+                            <h3 className='md:text-4xl p-4' >No saved movies</h3>
+                        )
                     }
                 </div>
                 <MdChevronRight
