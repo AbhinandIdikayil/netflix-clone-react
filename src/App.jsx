@@ -15,6 +15,7 @@ function App() {
     <>
       <AuthContextProvider >
         <Routes >
+          {/* hi how are you */}
           <Route path='/' element={<Layout />} >
             <Route path='' element={<Home />} />
             <Route path='/login' element={<Login />} />
