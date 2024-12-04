@@ -30,7 +30,7 @@ function Row({ title, fetchURL,rowId }) {
                     className='bg-white text-zinc-950 rounded-full absolute opacity-50 z-[90] hidden group-hover:block hover:bg-gray-300'
                     size={40}
                 />
-                <div id={'slider' + rowId} className='h-full w-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide duration-1000 ease-in-out' >
+                <div id={'slider' + rowId} className='h-full w-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide duration-500 ease-in-out' >
                     {
                         movies.map((item, id) => (
                             <Movie item={item} id={id} />
